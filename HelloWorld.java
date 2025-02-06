@@ -89,11 +89,6 @@ public class HelloWorld {
 
         if (person.equals(secondPerson)) {
             System.out.println(person.getName() + " and " + secondPerson.getName() + " are the same person."); // Accessor
-                                                                                                               // methods
-                                                                                                               // are
-                                                                                                               // getName()
-                                                                                                               // and
-                                                                                                               // address()
         }
 
         if (!person.equals(thirdPerson)) {
