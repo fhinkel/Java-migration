@@ -53,7 +53,7 @@ public class HelloWorld {
     private static final String SATURDAY = "Saturday";
 
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        System.out.println("Hello, World of 2014!");
 
         List<String> names = new ArrayList<>();
         names.add("Alice");
