@@ -18,6 +18,9 @@ public class HelloWorld {
         names.add("Alice");
         names.add("Bob");
         names.add("Charlie");
+        names.add("David");
+        names.add("Eve");
+
 
         // for (String name : names) {
         // System.out.println("Hello, " + name + "!");
