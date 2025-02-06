@@ -14,36 +14,28 @@ public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
 
-        List<String> names = new ArrayList<>();
+        var names = new ArrayList<String>(); // var
         names.add("Alice");
         names.add("Bob");
         names.add("Charlie");
         names.add("David");
         names.add("Eve");
 
-
-        // for (String name : names) {
-        // System.out.println("Hello, " + name + "!");
-        // }
-
-        for (int i = 0; i < names.size(); i++) {
-            System.out.println("Hello, " + names.get(i) + "!");
+        // Enhanced for loop (more idiomatic, even though not a Java 21 specific change)
+        for (var name : names) {       // var makes sense here
+            System.out.println("Hello, " + name + "!");
         }
 
-        String day = MONDAY;
 
-        String result = "";
-        switch (day) {
-            case MONDAY:
-                result = "Have a good start of the workweek!";
-                break;
-            case FRIDAY:
-                result = "FriYay!";
-                break;
-            case SATURDAY:
-                result = "Enjoy your weekend!";
-                break;
-        }
+        var day = MONDAY;             // var
+
+        // Enhanced switch (Java 14+, preferred style)
+        var result = switch (day) {   // var
+            case MONDAY -> "Have a good start of the workweek!";
+            case FRIDAY -> "FriYay!";
+            case SATURDAY -> "Enjoy your weekend!";
+            default -> ""; // Always have a default branch or exhaustive cases
+        };
 
         System.out.println(result);
     }
