@@ -1,38 +1,39 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelloWorld {
 
+    private static final String MONDAY = "Monday";
+    private static final String FRIDAY = "Friday";
+    private static final String SATURDAY = "Saturday";
+
     public static void main(String[] args) {
         System.out.println("Hello, World!");
 
-        var names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         names.add("Alice");
         names.add("Bob");
-        names.add("Charlie");
-        names.add("David");
-        names.add("Eve");
 
-        for (var name : names) {
-            System.out.println("Hello, " + name + "!");
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println("Hello, " + names.get(i) + "!");
         }
 
-        var day = today();
-        System.out.println("Today is " + day);
+        String day = MONDAY;
 
-        var result = switch (day) {
-            case "MONDAY" -> "Have a good start of the workweek!";
-            case "WEDNESDAY" -> "Hump day, working towards the weekend.";
-            case "FRIDAY" -> "FriYay!";
-            case "SATURDAY" -> "Enjoy your weekend!";
-            default -> "It's a normal day, " + day + ".";
-        };
+        String result = "";
+        switch (day) {
+            case MONDAY:
+                result = "Have a good start of the workweek!";
+                break;
+            case FRIDAY:
+                result = "FriYay!";
+                break;
+            case SATURDAY:
+                result = "Enjoy your weekend!";
+                break;
+        }
 
         System.out.println(result);
-
-        // Use record (Java 14+)
-        record Person(String name, String address) {}  // No need for the separate Person class anymore
 
         var person = new Person("John Doe", "100 Linda Ln.");
 
@@ -42,16 +43,12 @@ public class HelloWorld {
         var thirdPerson = new Person("Jane Doe", "100 Linda Ln.");
 
         if (person.equals(secondPerson)) {
-            System.out.println(person.name() + " and " + secondPerson.name() + " are the same person."); // Accessor methods are name() and address()
+            System.out.println(person.getName() + " and " + secondPerson.getName() + " are the same person."); // Accessor methods are getName() and address()
         }
 
         if (!person.equals(thirdPerson)) {
-            System.out.println(person.name() + " and " + thirdPerson.name() + " are not the same person.");
+            System.out.println(person.getName() + " and " + thirdPerson.getName() + " are not the same person.");
         }
     }
-
-    private static String today() {
-        LocalDate today = LocalDate.now();
-        return today.getDayOfWeek().toString();
-    }
 }
+
