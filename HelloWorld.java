@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HelloWorld {
 
     public static void main(String[] args) {
@@ -33,6 +34,22 @@ public class HelloWorld {
         };
 
         System.out.println(result);
+
+        Person person = new Person("John Doe", "100 Linda Ln.");
+
+        System.out.println(person);
+
+        Person secondPerson = new Person("John Doe", "100 Linda Ln.");
+        Person thirdPerson = new Person("Jane Doe", "100 Linda Ln.");
+
+        if(person.equals(secondPerson)) {
+            System.out.println(person.getName() + " and " + secondPerson.getName() + " are the same person.");
+        }
+
+        if(!person.equals(thirdPerson)) {
+            System.out.println(person.getName() + " and " + thirdPerson.getName() + " are not the same person.");
+        }
+
     }
 
     private static String today() {
