@@ -53,7 +53,7 @@ public class TaskManager {
         for (Task task : tasks) { // Enhanced for loop, more readable
             if (task.id().equals(taskId)) {
                 // Create a new Task with the updated completed status
-                tasks.set(tasks.indexOf(task), new Task(task.id(), task.description(), task.dueDate(), true));
+                tasks.set(tasks.indexOf(task), new Task(task.id(), task.description(), task.dueDate(), true, 0));
                 return true;
             }
         }
@@ -67,5 +67,13 @@ public class TaskManager {
             }
         }
         return null;
+    }
+
+    public int totalPendingTime() {
+        int totalTime = 0;
+        for (Task task : tasks) {
+            totalTime += task.pendingTime();
+        }
+        return totalTime;
     }
 }

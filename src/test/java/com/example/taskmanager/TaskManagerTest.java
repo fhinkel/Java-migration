@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TaskManagerTest {
 
@@ -56,5 +57,24 @@ public class TaskManagerTest {
         //that getAllTasks correctly reflects the completed status.
         Task completedTask = taskManager.findTaskById(taskId);
         assertTrue(completedTask.completed());
+    }
+
+    @Test
+    public void testTotalPendingTime() {
+        Date dueDate1 = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)); //due in one day
+        taskManager.addTask("Task 1", dueDate1);
+
+        Date dueDate2 = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(3)); //due in 3 days
+        taskManager.addTask("Task 2", dueDate2);
+
+
+        Date dueDate3 = new Date(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)); //due in the past
+        taskManager.addTask("Task 3", dueDate3);
+
+
+        int totalTime = taskManager.totalPendingTime();
+
+        // Expecting approximately 24+72 hours, due to the time it takes to run the tests
+        assertTrue(totalTime >= 24 * 60 && totalTime / 60 <= 100 * 60); //Allowing for some variation
     }
 }
