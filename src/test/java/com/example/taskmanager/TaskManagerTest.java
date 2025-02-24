@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
 public class TaskManagerTest {
 
@@ -28,4 +29,32 @@ public class TaskManagerTest {
     }
 
     // You can add more tests here
+     @Test
+    public void testGetAllTasks() {
+        Date dueDate1 = new Date();
+        taskManager.addTask("Task 1", dueDate1);
+        Date dueDate2 = new Date();
+        taskManager.addTask("Task 2", dueDate2);
+        Date dueDate3 = new Date();
+        taskManager.addTask("Task 3", dueDate3);
+
+        List<Task> allTasks = taskManager.getAllTasks();
+        assertEquals(3, allTasks.size());
+    }
+
+    @Test
+    public void testMarkComplete() {
+        Date dueDate = new Date();
+        String taskId = taskManager.addTask("Test Task", dueDate);
+        Task task = taskManager.findTaskById(taskId);
+        assertNotNull(task);
+
+        assertTrue(taskManager.markComplete(taskId));
+        assertTrue(task.isCompleted());
+
+        //Added check to see that the task is still retrievable.  A better test might be to verify
+        //that getAllTasks correctly reflects the completed status.
+        Task completedTask = taskManager.findTaskById(taskId);
+        assertTrue(completedTask.isCompleted());
+    }
 }
