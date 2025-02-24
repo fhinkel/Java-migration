@@ -34,9 +34,9 @@ public class TaskManager {
     }
 
     public Task findTaskById(String taskId) {
-        for (Task task : tasks) {
-            if (task.getId().equals(taskId)) {
-                return task;
+        for (int i = 0; i < tasks.size(); i++)  {
+            if (tasks.get(i).getId().equals(taskId)) {
+                return tasks.get(i);
             }
         }
         return null;
