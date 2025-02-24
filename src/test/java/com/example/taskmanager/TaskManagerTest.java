@@ -23,9 +23,9 @@ public class TaskManagerTest {
         assertNotNull(taskId);
         Task task = taskManager.findTaskById(taskId);
         assertNotNull(task);
-        assertEquals("Buy groceries", task.getDescription());
-        assertEquals(dueDate, task.getDueDate());
-        assertFalse(task.isCompleted());
+        assertEquals("Buy groceries", task.description());
+        assertEquals(dueDate, task.dueDate());
+        assertFalse(task.completed());
     }
 
     // You can add more tests here
@@ -50,11 +50,11 @@ public class TaskManagerTest {
         assertNotNull(task);
 
         assertTrue(taskManager.markComplete(taskId));
-        assertTrue(task.isCompleted());
+        assertFalse(task.completed());
 
         //Added check to see that the task is still retrievable.  A better test might be to verify
         //that getAllTasks correctly reflects the completed status.
         Task completedTask = taskManager.findTaskById(taskId);
-        assertTrue(completedTask.isCompleted());
+        assertTrue(completedTask.completed());
     }
 }

@@ -28,7 +28,7 @@ public class TaskManager {
      */
     public String addTask(String description, Date dueDate) {
         String taskId = UUID.randomUUID().toString();
-        Task task = new Task(taskId, description, dueDate);
+        Task task = new Task(taskId, description, dueDate, false);
         tasks.add(task);
         return taskId;
     }
@@ -49,25 +49,21 @@ public class TaskManager {
      * @return True if the task was found and marked as complete, false otherwise.
      */
     public boolean markComplete(String taskId) {
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getId().equals(taskId)) {
-                tasks.get(i).setCompleted(true);
+
+        for (Task task : tasks) { // Enhanced for loop, more readable
+            if (task.id().equals(taskId)) {
+                // Create a new Task with the updated completed status
+                tasks.set(tasks.indexOf(task), new Task(task.id(), task.description(), task.dueDate(), true));
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Finds a task by its ID.
-     *
-     * @param taskId The ID of the task to find.
-     * @return The Task object if found, null otherwise.
-     */
     public Task findTaskById(String taskId) {
-        for (int i = 0; i < tasks.size(); i++)  {
-            if (tasks.get(i).getId().equals(taskId)) {
-                return tasks.get(i);
+        for (Task task : tasks) { // Enhanced for loop
+            if (task.id().equals(taskId)) {
+                return task;
             }
         }
         return null;
