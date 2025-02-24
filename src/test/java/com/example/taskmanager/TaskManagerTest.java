@@ -28,5 +28,5 @@ public class TaskManagerTest {
         assertFalse(task.isCompleted());
     }
 
-    // You can add more tests here, and for the findTaskById method in TaskManager for task #3
+    // You can add more tests here
 }
