@@ -24,9 +24,9 @@ public class TaskManager {
     }
 
     public boolean markComplete(String taskId) {
-        for (Task task : tasks) {
-            if (task.getId().equals(taskId)) {
-                task.setCompleted(true);
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getId().equals(taskId)) {
+                tasks.get(i).setCompleted(true);
                 return true;
             }
         }
