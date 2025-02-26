@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,7 @@ public class TaskManagerTest {
 
     @Test
     public void testAddTask() {
-        Date dueDate = new Date();
+        LocalDate dueDate = LocalDate.now();
         String taskId = taskManager.addTask("Buy groceries", dueDate);
         assertNotNull(taskId);
         Task task = taskManager.findTaskById(taskId);
@@ -29,14 +30,13 @@ public class TaskManagerTest {
         assertFalse(task.completed());
     }
 
-    // You can add more tests here
      @Test
     public void testGetAllTasks() {
-        Date dueDate1 = new Date();
+        LocalDate dueDate1 = LocalDate.now();
         taskManager.addTask("Task 1", dueDate1);
-        Date dueDate2 = new Date();
+        LocalDate dueDate2 = LocalDate.now().plusDays(1);
         taskManager.addTask("Task 2", dueDate2);
-        Date dueDate3 = new Date();
+        LocalDate dueDate3 = LocalDate.now().plusDays(2);
         taskManager.addTask("Task 3", dueDate3);
 
         List<Task> allTasks = taskManager.getAllTasks();
@@ -45,21 +45,19 @@ public class TaskManagerTest {
 
     @Test
     public void testMarkComplete() {
-        Date dueDate = new Date();
+        LocalDate dueDate = LocalDate.now();
         String taskId = taskManager.addTask("Test Task", dueDate);
         Task task = taskManager.findTaskById(taskId);
         assertNotNull(task);
 
         assertTrue(taskManager.markComplete(taskId));
-        assertFalse(task.completed());
-
-        //Added check to see that the task is still retrievable.  A better test might be to verify
-        //that getAllTasks correctly reflects the completed status.
         Task completedTask = taskManager.findTaskById(taskId);
         assertTrue(completedTask.completed());
+        assertEquals("Test Task", completedTask.description());
+        assertEquals(dueDate, completedTask.dueDate());
     }
-
-    @Test
+    
+        @Test
     public void testTotalPendingTime() {
         Date dueDate1 = new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1)); //due in one day
         taskManager.addTask("Task 1", dueDate1);
@@ -76,5 +74,22 @@ public class TaskManagerTest {
 
         // Expecting approximately 24+72 hours, due to the time it takes to run the tests
         assertTrue(totalTime >= 24 * 60 && totalTime / 60 <= 100 * 60); //Allowing for some variation
+    }
+    
+        @Test
+    public void testMarkCompleteCorrectlyUpdatesTask() {
+        LocalDate dueDate = LocalDate.now();
+        String taskId = taskManager.addTask("Test Task", dueDate);
+        Task task = taskManager.findTaskById(taskId);
+        assertNotNull(task);
+        assertEquals("Test Task", task.description());
+        assertFalse(task.completed());
+
+        assertTrue(taskManager.markComplete(taskId));
+
+        Task completedTask = taskManager.findTaskById(taskId);
+        assertTrue(completedTask.completed());
+        assertEquals("Test Task", completedTask.description());
+        assertEquals(dueDate, completedTask.dueDate());
     }
 }
