@@ -18,14 +18,27 @@ public class TaskManagerTest {
     @Test
     public void testAddTask() {
         Date dueDate = new Date();
-        String taskId = taskManager.addTask("Buy groceries", dueDate);
+        String taskId = taskManager.addTask("Buy groceries", dueDate, 60);
         assertNotNull(taskId);
         Task task = taskManager.findTaskById(taskId);
         assertNotNull(task);
         assertEquals("Buy groceries", task.getDescription());
         assertEquals(dueDate, task.getDueDate());
         assertFalse(task.isCompleted());
+        assertEquals(60, task.getTimeToComplete());
     }
 
-    // You can add more tests here
+    @Test
+    public void testCalculateTotalTimeToComplete() {
+        Date dueDate = new Date();
+        taskManager.addTask("Task 1", dueDate, 30);
+        taskManager.addTask("Task 2", dueDate, 45);
+        String taskId3 = taskManager.addTask("Task 3", dueDate, 60);
+
+        assertEquals(135, taskManager.calculateTotalTimeToComplete());
+
+        taskManager.markComplete(taskId3);
+
+        assertEquals(75, taskManager.calculateTotalTimeToComplete());
+    }
 }

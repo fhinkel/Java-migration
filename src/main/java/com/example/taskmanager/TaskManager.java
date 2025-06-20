@@ -12,9 +12,9 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
-    public String addTask(String description, Date dueDate) {
+    public String addTask(String description, Date dueDate, int timeToComplete) {
         String taskId = UUID.randomUUID().toString();
-        Task task = new Task(taskId, description, dueDate);
+        Task task = new Task(taskId, description, dueDate, timeToComplete);
         tasks.add(task);
         return taskId;
     }
@@ -40,5 +40,15 @@ public class TaskManager {
             }
         }
         return null;
+    }
+
+    public int calculateTotalTimeToComplete() {
+        int totalTime = 0;
+        for (Task task : tasks) {
+            if (!task.isCompleted()) {
+                totalTime += task.getTimeToComplete();
+            }
+        }
+        return totalTime;
     }
 }
