@@ -7,12 +7,14 @@ public class Task {
     private String description;
     private Date dueDate;
     private boolean completed;
+    private int timeToComplete;
 
-    public Task(String id, String description, Date dueDate) {
+    public Task(String id, String description, Date dueDate, int timeToComplete) {
         this.id = id;
         this.description = description;
         this.dueDate = dueDate;
         this.completed = false;
+        this.timeToComplete = timeToComplete;
     }
 
     public String getId() {
@@ -45,5 +47,13 @@ public class Task {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public int getTimeToComplete() {
+        return timeToComplete;
+    }
+
+    public void setTimeToComplete(int timeToComplete) {
+        this.timeToComplete = timeToComplete;
     }
 }
