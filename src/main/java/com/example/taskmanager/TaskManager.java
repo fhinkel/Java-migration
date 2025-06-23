@@ -23,7 +23,7 @@ public class TaskManager {
         return new ArrayList<>(tasks); // Return a copy to avoid external modification
     }
 
-    public boolean markComplete(String taskId) {
+    public boolean markTaskComplete(String taskId) {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getId().equals(taskId)) {
                 tasks.get(i).setCompleted(true);
