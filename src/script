@@ -1,0 +1,12 @@
+Please create a histogram.
+
+Use all 4 Google IO colors for the histogram.
+
+@GoogleDocs summarize the 'prd for java taskmanager' file
+
+update the Java version (to 21) and the Spring Boot framework (to the latest 3.x with support for 21). Additionally, the project will migrate away from the deprecated "joda-time" library to more modern alternatives.
+
+Always generate unit tests when creating a new function
+
+Add a feature to find duration of incomplete tasks
+

@@ -27,5 +27,14 @@ public class TaskManagerTest {
         assertFalse(task.isCompleted());
     }
 
+    @Test
+    public void testCalculateTotalTimeRemaining() {
+        Date now = new Date();
+        taskManager.addTask("Task 1", new Date(now.getTime() + 3600000)); // 1 hour from now
+        taskManager.addTask("Task 2", new Date(now.getTime() + 7200000)); // 2 hours from now
+        long totalTimeRemaining = taskManager.calculateTotalTimeRemaining();
+        assertTrue(totalTimeRemaining > 0);
+    }
+
     // You can add more tests here
 }

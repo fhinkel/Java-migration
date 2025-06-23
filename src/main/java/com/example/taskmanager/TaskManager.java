@@ -41,4 +41,18 @@ public class TaskManager {
         }
         return null;
     }
+
+    public long calculateTotalTimeRemaining() {
+        long totalTimeRemaining = 0;
+        Date now = new Date();
+        for (Task task : tasks) {
+            if (!task.isCompleted()) {
+                long diff = task.getDueDate().getTime() - now.getTime();
+                if (diff > 0) {
+                    totalTimeRemaining += diff;
+                }
+            }
+        }
+        return totalTimeRemaining;
+    }
 }
